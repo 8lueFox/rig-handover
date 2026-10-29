@@ -39,6 +39,17 @@ export function createApp(config: RigConfig = loadConfig()) {
     );
   });
 
+  app.get('/api/digest/:night', (c) => {
+    const night = c.req.param('night');
+    if (!existsSync(join(config.runsDir, `${night}.jsonl`))) {
+      return c.json({ error: 'night not found' }, 404);
+    }
+    const rows = readNight(config.runsDir, night).sort((a, b) =>
+      a.job.localeCompare(b.job),
+    );
+    return c.json({ night, rows });
+  });
+
   app.get('/', (c) => {
     const status = readStatus(config);
     return c.html(
