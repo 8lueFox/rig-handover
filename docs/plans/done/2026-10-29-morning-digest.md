@@ -1,6 +1,7 @@
----
+﻿---
 plan: morning-digest
-status: ready
+status: done
+closed: 2026-10-29
 owner: rook
 opened: 2026-10-29
 ---
@@ -20,7 +21,7 @@ error, first and last time. One JSON object per line (`at`, `job`, `status`: `ok
 `owner`, optional `error`).
 
 - A line that doesn't parse is counted, never thrown. The night still renders.
-- `owner` can be `null`. Keep the row; show the owner as `—`.
+- `owner` can be `null`. Keep the row; show the owner as `â€”`.
 - Lives in `src/digest/`. Commit `src/digest/types.ts` first (the `DigestRow` type and the
   `readNight(runsDir, night)` signature), so every part of section 2 can start against it.
 
@@ -77,3 +78,18 @@ page again with `LANE_MARKER` unset (the banner reads "no marker set") and uploa
 link. Move this plan to `docs/plans/done/` with its issue list.
 
 Done when: the preview link no longer shows the lane marker.
+
+## Issues
+
+| # | Issue | Blocked by | Worker | Closed |
+|---|-------|-----------|--------|--------|
+| 1 | Commit src/digest/types.ts | - | opencode · glm-5-2 · high | 2026-10-29 |
+| 2 | Run log reader: readNight | #1 | opencode · glm-5-2 · high | 2026-10-29 |
+| 3 | Digest page: GET /digest/:night | #1 | opencode · glm-5-2 · high | 2026-10-29 |
+| 4 | Digest JSON: GET /api/digest/:night | #1 | opencode · glm-5-2 · high | 2026-10-29 |
+| 5 | Board link: nights link to their digest | #1 | opencode · glm-5-2 · high | 2026-10-29 |
+| 6 | Route tests for /digest and /api/digest | #3, #4 | opencode · glm-5-2 · high | 2026-10-29 |
+| 7 | Preview for review: HTML copy on a public host | #3 | opencode · glm-5-2 · high | open (done when the reviewer looks) |
+| 8 | Clean up: re-upload preview without the lane marker | #7 | opencode · glm-5-2 · high | 2026-10-29 |
+
+The preview link: https://8luefox.github.io/rig-handover/ — re-uploaded without the lane marker (ADR 0003).
